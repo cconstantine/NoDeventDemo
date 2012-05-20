@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 
 #Basic config
 set :application, "NoDevent"
-set :repository, "git@github.com:cconstantine/NoDevent.git"
+set :repository, "git@github.com:cconstantine/NoDeventDemo.git"
 set :scm, "git"
 set :user, "cconstantine"
 set :git_shallow_clone, 1
