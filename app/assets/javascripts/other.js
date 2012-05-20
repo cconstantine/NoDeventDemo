@@ -13,11 +13,12 @@ $(function () {
                  });
 
 });
-
+var lastLocation = null;
 function updateLoc(url, data) {
   $(function() {
       navigator.geolocation.watchPosition(
         function(location) {
+          lastLocation = location;
           console.log(location);
           $.post(url, {user : user, loc : location});
         });
@@ -80,6 +81,9 @@ function onJoin(name, room) {
         var circle = users[user.name];
         map.removeLayer(circle);
       }
+      
     });
-  
+  if (lastLocation)
+    $.post(url, {user : user, loc : lastLocation});
+
 }
