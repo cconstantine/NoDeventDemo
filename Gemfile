@@ -25,6 +25,9 @@ group :development do
     gem 'rvm-capistrano'
 end
 
+group :production do
+    gem 'unicorn'
+end
 
 gem 'jquery-rails'
 
