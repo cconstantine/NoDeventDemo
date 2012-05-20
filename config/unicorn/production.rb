@@ -3,7 +3,7 @@ worker_processes 4
 
 working_directory "/var/www/nodevent/current"
 
-pid "/var/www/fasterfare/shared/pids/unicorn.pid"
+pid "/var/www/nodevent/shared/pids/unicorn.pid"
 stderr_path "/var/www/nodevent/shared/log/unicorn_stderr.log"
 stdout_path "/var/www/nodevent/shared/log/unicorn_stdout.log"
 
