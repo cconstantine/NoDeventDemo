@@ -32,6 +32,16 @@ GEM
     ansi (1.4.2)
     arel (2.2.3)
     builder (3.0.0)
+    capistrano (2.12.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
+    capistrano-unicorn (0.1.6)
+      capistrano
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
       railties (~> 3.1.0)
@@ -42,11 +52,13 @@ GEM
     erubis (2.7.0)
     execjs (1.3.2)
       multi_json (~> 1.0)
+    highline (1.6.12)
     hike (1.2.1)
     i18n (0.6.0)
     jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
+    jruby-pageant (1.0.2)
     json (1.7.3)
     mail (2.3.3)
       i18n (>= 0.4.0)
@@ -54,6 +66,14 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.18)
     multi_json (1.3.5)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.4.0)
+      jruby-pageant (>= 1.0.2)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     nodevent (0.2.0)
       redis (>= 2.0.0)
     polyglot (0.3.3)
@@ -85,6 +105,8 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redis (2.2.2)
+    rvm-capistrano (1.2.0)
+      capistrano (>= 2.0.0)
     sass (3.1.18)
     sass-rails (3.1.6)
       actionpack (~> 3.1.0)
@@ -112,10 +134,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  capistrano
+  capistrano-ext
+  capistrano-unicorn
   coffee-rails (~> 3.1.1)
   jquery-rails
   nodevent
   rails (= 3.1.3)
+  rvm-capistrano
   sass-rails (~> 3.1.5)
   sqlite3
   turn (= 0.8.2)

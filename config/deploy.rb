@@ -4,7 +4,7 @@ require 'bundler/capistrano'
 set :application, "NoDevent"
 set :repository, "git@github.com:cconstantine/NoDevent.git"
 set :scm, "git"
-set :user, "www-data"
+set :user, "cconstantine"
 set :git_shallow_clone, 1
 set :deploy_to, "/var/www/nodevent"
 default_run_options[:pty] = true
