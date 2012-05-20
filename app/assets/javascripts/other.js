@@ -13,11 +13,13 @@ $(function () {
                  });
 
 });
+var locationUrl = null;
 var lastLocation = null;
 function updateLoc(url, data) {
   $(function() {
       navigator.geolocation.watchPosition(
         function(location) {
+          locationUrl = url;
           lastLocation = location;
           console.log(location);
           $.post(url, {user : user, loc : location});
@@ -84,6 +86,6 @@ function onJoin(name, room) {
       
     });
   if (lastLocation)
-    $.post(url, {user : user, loc : lastLocation});
+    $.post(locationUrl, {user : user, loc : lastLocation});
 
 }
