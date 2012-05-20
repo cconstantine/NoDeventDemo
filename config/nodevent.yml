@@ -3,14 +3,14 @@ development: &development
   namespace: ''
 
 test: &test
-  host: 'http://ec2-75-101-164-22.compute-1.amazonaws.com'
+  host: 'http://ec2-75-101-164-22.compute-1.amazonaws.com:8080'
   namespace: ''
 
 cucumber:
   <<: *test
 
 production:
-  host: 'http://ec2-75-101-164-22.compute-1.amazonaws.com'
+  host: 'http://ec2-75-101-164-22.compute-1.amazonaws.com:8080'
   namespace: ''
   
 
