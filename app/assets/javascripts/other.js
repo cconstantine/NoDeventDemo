@@ -87,6 +87,9 @@ function onJoin(name, room) {
       
     });
   if (lastLocation)
-    $.post(locationUrl, {user : user, loc : lastLocation});
-
+    setTimeout(
+      100,
+      function() {
+        $.post(locationUrl, {user : user, loc : lastLocation});
+      });
 }
