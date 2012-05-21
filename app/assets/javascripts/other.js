@@ -1,17 +1,4 @@
 var map = null;
-var locationUrl = null;
-var lastLocation = null;
-function updateLoc(url, data) {
-  $(function() {
-      navigator.geolocation.watchPosition(
-        function(location) {
-          locationUrl = url;
-          lastLocation = location;
-          console.log(location);
-          $.post(url, {user : user, loc : location});
-        });
-    });
-}
 
 function onJoin(name, room) {
 
@@ -83,9 +70,10 @@ function onJoin(name, room) {
       }
       
     });
-  setTimeout(
-    100,
-    function() {
-      $.post(locationUrl, {user : user, loc : lastLocation});
+  
+  navigator.geolocation.watchPosition(
+    function(location) {
+      console.log(location);
+      $.post(update_url, {user : user, loc : location});
     });
 }

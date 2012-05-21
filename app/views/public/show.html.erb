@@ -5,12 +5,12 @@
 <% content_for :js do %>
   var user = <%= @user.to_json.html_safe %>;
   var theroom = null;
+  var update_url = '<%= public_path %>';
   NoDevent.ready(
     user, function() {
       var roomname = '<%= NoDevent::Emitter.room("theroom") %>';
       onJoin(roomname, NoDevent.join(roomname));
     });
-  updateLoc('<%= public_path %>');
 
 <% end %>
 <a href="https://github.com/cconstantine/NoDeventDemo"><img style="
