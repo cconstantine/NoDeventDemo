@@ -88,7 +88,7 @@ function onJoin(name, room) {
       $.post(update_url, {user : user, loc : location});
     });
 
-  setInterval(
+  setTimeout(
     function() {
       $.post(update_url, {user : user, loc : latestLoc});
     },
