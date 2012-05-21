@@ -1,7 +1,4 @@
 var map = null;
-$(function () {
-
-});
 var locationUrl = null;
 var lastLocation = null;
 function updateLoc(url, data) {
@@ -86,10 +83,9 @@ function onJoin(name, room) {
       }
       
     });
-  if (lastLocation)
-    setTimeout(
-      100,
-      function() {
-        $.post(locationUrl, {user : user, loc : lastLocation});
-      });
+  setTimeout(
+    100,
+    function() {
+      $.post(locationUrl, {user : user, loc : lastLocation});
+    });
 }
