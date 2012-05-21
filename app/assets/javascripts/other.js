@@ -71,9 +71,17 @@ function onJoin(name, room) {
       
     });
   
+  var latestLoc = null;
   navigator.geolocation.watchPosition(
     function(location) {
       console.log(location);
+      latestLoc = location;
       $.post(update_url, {user : user, loc : location});
+    });
+
+  setInterval(
+    1000,
+    function() {
+      $.post(update_url, {user : user, loc : latestLoc});
     });
 }
