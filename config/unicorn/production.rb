@@ -1,5 +1,5 @@
 listen "/tmp/unicorn.sock"
-worker_processes 4
+worker_processes 2
 
 working_directory "/var/www/nodevent/current"
 

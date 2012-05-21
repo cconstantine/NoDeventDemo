@@ -13,6 +13,18 @@ set :rvm_ruby_string, '1.9.2-p318@nodevent'
 set :rvm_install_ruby, :install
 require "rvm/capistrano"
 
+namespace :nodevent do
+  desc "deploy the precompiled assets"
+  task :deploy_assets, :except => { :no_release => true } do
+    run_locally "bundle exec rake assets:precompile RAILS_ENV=production "
+    upload("public/assets", "#{release_path}/public/assets", :via =>
+           :scp, :recursive => true, :roles => :app)
+    run_locally "bundle exec rake assets:clean RAILS_ENV=production"
+  end
+end
+
+before "deploy:create_symlink",    "nodevent:deploy_assets", "deploy:migrate"
+
 #Bundler
 set :bundle_dir,          fetch(:shared_path)+"/bundle"
 set :bundle_flags,       "--deployment --quiet"
@@ -20,9 +32,6 @@ set :bundle_flags,       "--deployment --quiet"
 #Servers
 role :app, "ec2-75-101-164-22.compute-1.amazonaws.com"
 role :db,  "ec2-75-101-164-22.compute-1.amazonaws.com", :primary => true
-
-
-before "deploy:symlink", "deploy:migrate"
     
 set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
 require 'capistrano-unicorn'
