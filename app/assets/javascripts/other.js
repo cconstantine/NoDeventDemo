@@ -80,8 +80,8 @@ function onJoin(name, room) {
     });
 
   setInterval(
-    1000,
     function() {
       $.post(update_url, {user : user, loc : latestLoc});
-    });
+    },
+    1000);
 }
