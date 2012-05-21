@@ -17,6 +17,7 @@ function updateLoc(url, data) {
 }
 
 function onJoin(name, room) {
+/*
   // Define the map to use from MapBox
   // This is the TileJSON endpoint copied from the embed button on your map
   var url = 'http://a.tiles.mapbox.com/v3/cconstantine.map-gyhx1cl1.jsonp';
@@ -28,7 +29,7 @@ function onJoin(name, room) {
   wax.tilejson(url, function(tilejson) {
                  map.addLayer(new wax.leaf.connector(tilejson));
                });
-  
+  */
   var users = {};
   console.log(name);
   room.on('location',
