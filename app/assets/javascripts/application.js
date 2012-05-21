@@ -24,7 +24,6 @@ function onJoin(name, room) {
                });
   
   var users = {};
-  console.log(name);
   room.on('location',
           function(data) {
             var circle = users[data.user.name];
@@ -53,7 +52,6 @@ function onJoin(name, room) {
     function(user) {
       user_counts[user.name] |= 0;
       user_counts[user.name]++;
-      console.log("joining ",  room.name, user.name);
     });
 
   room.users.on(
@@ -64,12 +62,10 @@ function onJoin(name, room) {
         if (!user_counts[member])
           user_counts[member] = 1;
       }
-      console.log('members', members);
     });
   room.users.on(
     'leave',
     function(user) {
-      console.log("leaving ",  room.name, user.name);
       user_counts[user.name]++;
       if (user_counts[user.name] == 0) {        
         delete user_counts[user.name];
@@ -83,7 +79,6 @@ function onJoin(name, room) {
   var latestLoc = null;
   navigator.geolocation.watchPosition(
     function(location) {
-      console.log(location);
       latestLoc = location;
       $.post(update_url, {user : user, loc : location});
     });
