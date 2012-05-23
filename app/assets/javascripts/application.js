@@ -16,13 +16,25 @@ function onJoin(name, room) {
   var url = 'http://a.tiles.mapbox.com/v3/cconstantine.map-gyhx1cl1.jsonp';
   
   // Make a new Leaflet map in your container div
-  map = new L.Map('mapbox').setView(new L.LatLng(39.572, -95.449), 4);
+  map = new L.Map('mapbox').setView(new L.LatLng(39.572, -95.449), 3);
   
   // Get metadata about the map from MapBox
   wax.tilejson(url, function(tilejson) {
                  map.addLayer(new wax.leaf.connector(tilejson));
                });
-  
+
+  room.on("tweet",
+         function(status) {
+           if (status.coordinates) {
+             var location = new L.GeoJSON(status.coordinates);
+             map.addLayer(location);
+             setTimeout(function() {
+                          map.removeLayer(location);
+                        }, 1000);
+           }
+         }
+);
+  /*
   var users = {};
   room.on('location',
           function(data) {
@@ -45,7 +57,6 @@ function onJoin(name, room) {
               circle.setLatLng(latlng, coords.accuracy);
             }
           });
-  
   var user_counts = {};
   room.users.on(
     'join',
@@ -75,7 +86,6 @@ function onJoin(name, room) {
       }
       
     });
-  
   var latestLoc = null;
   navigator.geolocation.watchPosition(
     function(location) {
@@ -88,4 +98,6 @@ function onJoin(name, room) {
       $.post(update_url, {user : user, loc : latestLoc});
     },
     1000);
+
+   */
 }

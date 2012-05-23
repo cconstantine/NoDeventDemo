@@ -1,6 +1,11 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
+gem 'tweetstream'
+gem 'oauth'
+gem 'eventmachine'
+gem 'em-http-request'
+gem 'yajl-ruby'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
