@@ -26,7 +26,6 @@ function onJoin(name, room) {
   room.on("tweet",
          function(status) {
            if (status.coordinates) {
-             console.log(status.text);
              var location = new L.GeoJSON(status.coordinates);
              location.bindPopup(status.text);
              map.addLayer(location);
