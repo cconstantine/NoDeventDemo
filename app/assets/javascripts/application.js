@@ -23,15 +23,20 @@ function onJoin(name, room) {
                  map.addLayer(new wax.leaf.connector(tilejson));
                });
 
+  var tweets = [];
   room.on("tweet",
          function(status) {
            if (status.coordinates) {
              var location = new L.GeoJSON(status.coordinates);
              location.bindPopup(status.text);
              map.addLayer(location);
+
+             tweets.push(location);
+             if (tweets.length > 50)
+               tweets.shift();
              setTimeout(function() {
                           map.removeLayer(location);
-                        }, 10000);
+                        }, 1000*60);
            }
            
          }
