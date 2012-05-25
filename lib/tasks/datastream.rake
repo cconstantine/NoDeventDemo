@@ -5,6 +5,8 @@ auth_conf = YAML::load(File.open("/etc/twitter.yml"))[Rails.env]
 namespace :datastream  do
   desc "create some data"
   task :firehose => :environment do
+    require 'trend'
+
     TweetStream.configure do |config|
       config.consumer_key =       auth_conf['consumer_key']
       config.consumer_secret =    auth_conf['consumer_secret']
