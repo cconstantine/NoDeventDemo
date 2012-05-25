@@ -50,6 +50,7 @@ namespace :datastream  do
                                    #:track => trending.join(",")
                                    )  do |status|
       begin
+        next unless status.coordinates.present?
         status[:is_trending] = trending.any? do |x| status.text.include?(x) end
         
         NoDevent::Emitter.emit("tweets", "tweet", status)
