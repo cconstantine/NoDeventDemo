@@ -8,7 +8,7 @@
 //= require jquery_ujs
 //= require_tree .
 var map = null;
-
+var lastStatus;
 function onJoin(name, room) {
 
   // Define the map to use from MapBox
@@ -26,19 +26,32 @@ function onJoin(name, room) {
   var tweets = [];
   room.on("tweet",
          function(status) {
-           if (status.coordinates) {
-             var location = new L.GeoJSON(status.coordinates);
-             location.bindPopup(status.text);
-             map.addLayer(location);
+           lastStatus = status;
+           var location;
 
-             tweets.push(location);
-             if (tweets.length > 50)
-               tweets.shift();
-             setTimeout(function() {
-                          map.removeLayer(location);
-                        }, 1000*60);
-           }
+           if (status.coordinates) {
+             location = new L.GeoJSON(status.coordinates); 
+           } else if (status.place) {
+             return;
+             var coords = [];
+             for(var i in status.place.bounding_box.coordinates[0]) {
+               var coord = status.place.bounding_box.coordinates[0][i];
+               coords.push(new L.LatLng(coord[1], coord[0]));
+             }
+             location = new L.Polygon(coords);
+          }
            
+           location.bindPopup(status.text);
+           map.addLayer(location);
+           
+           tweets.push(location);
+           if (tweets.length > 100) {
+             map.removeLayer( tweets.shift());
+           }
+           /*setTimeout(function() {
+                        map.removeLayer(location);
+                      }, 1000*60);
+*/
          }
 );
   /*
