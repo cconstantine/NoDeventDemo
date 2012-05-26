@@ -5,14 +5,15 @@
 <% content_for :js do %>
   var user = <%= @user.to_json.html_safe %>;
   var theroom = null;
+  var trends = <%= @trends.html_safe %>;
   var update_url = '<%= public_path %>';
   NoDevent.ready(
     user, function() {
-      var roomname = '<%= NoDevent::Emitter.room("tweets") %>';
+      var roomname = '<%= NoDevent::Emitter.room("twitter") %>';
       onJoin(roomname, NoDevent.join(roomname));
     });
 
 <% end %>
 <a href="https://github.com/cconstantine/NoDeventDemo"><img style="
-z-index:10;position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 <div id="mapbox"></div>

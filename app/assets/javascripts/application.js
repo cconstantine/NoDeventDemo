@@ -10,7 +10,25 @@
 var map = null;
 var lastStatus;
 function onJoin(name, room) {
-
+  var TweetIcon = L.Icon.extend({options : {
+                                   iconUrl: null,
+                                   shadowUrl: null,
+                                   iconSize : new L.Point(10,10),
+                                   iconAnchor : new L.Point(10,10),
+                                   popupAnchor : new L.Point(10, 10),
+                                   className : "icon-asterisk"
+                                 }
+                                });
+  var TweetIconTrending = L.Icon.extend({options : {
+                                           iconUrl: null,
+                                           shadowUrl: null,
+                                           iconSize : new L.Point(10,10),
+                                           iconAnchor : new L.Point(10,10),
+                                           popupAnchor : new L.Point(10, 10),
+                                           className : "icon-fire"
+                                         }
+                                        });
+  
   // Define the map to use from MapBox
   // This is the TileJSON endpoint copied from the embed button on your map
   var url = 'http://a.tiles.mapbox.com/v3/cconstantine.map-gyhx1cl1.jsonp';
@@ -24,100 +42,35 @@ function onJoin(name, room) {
                });
 
   var tweets = [];
+  var trendingTweets = [];
   room.on("tweet",
          function(status) {
            lastStatus = status;
-           var location;
-
-           if (status.coordinates) {
-             location = new L.GeoJSON(status.coordinates); 
-           } else if (status.place) {
-             return;
-             var coords = [];
-             for(var i in status.place.bounding_box.coordinates[0]) {
-               var coord = status.place.bounding_box.coordinates[0][i];
-               coords.push(new L.LatLng(coord[1], coord[0]));
-             }
-             location = new L.Polygon(coords);
-          }
            
+           var latlng = new L.LatLng(status.coordinates.coordinates[1], status.coordinates.coordinates[0]);
+           var icon = status.is_trending.length > 0 ? new TweetIconTrending : new TweetIcon();
+           var location = new L.Marker(latlng, {icon: icon});
+                      
            location.bindPopup(status.text);
            map.addLayer(location);
-           
-           tweets.push(location);
-           if (tweets.length > 100) {
-             map.removeLayer( tweets.shift());
+           if (status.is_trending.length == 0) {
+             tweets.push(location);
+             if (tweets.length > 100) {
+               map.removeLayer( tweets.shift());
+             }
+           } else {
+             trendingTweets.push(location);
+             if (trendingTweets.length > 100) {
+               map.removeLayer( trendingTweets.shift());
+             }
            }
-           /*setTimeout(function() {
-                        map.removeLayer(location);
-                      }, 1000*60);
-*/
-         }
-);
-  /*
-  var users = {};
-  room.on('location',
-          function(data) {
-            var circle = users[data.user.name];
-            var coords = data.loc.coords;
+             
+         });
 
-            if (!circle) {
-              var circleLocation = new L.LatLng(coords.latitude, coords.longitude),
-              circleOptions = {
-                color: 'blue',
-                fillColor: 'blue',
-                fillOpacity: 0.5
-              };
-              
-              circle = new L.Circle(circleLocation, coords.accuracy, circleOptions);
-              users[data.user.name] = circle; 
-              map.addLayer(circle);
-            } else {
-              var latlng = new L.LatLng( coords.latitude, coords.longitude );
-              circle.setLatLng(latlng, coords.accuracy);
-            }
-          });
-  var user_counts = {};
-  room.users.on(
-    'join',
-    function(user) {
-      user_counts[user.name] |= 0;
-      user_counts[user.name]++;
-    });
-
-  room.users.on(
-    'members', 
-    function(members) {
-      for(var i in members) {
-        var member = members[i];
-        if (!user_counts[member])
-          user_counts[member] = 1;
-      }
-    });
-  room.users.on(
-    'leave',
-    function(user) {
-      user_counts[user.name]++;
-      if (user_counts[user.name] == 0) {        
-        delete user_counts[user.name];
-
-        var circle = users[user.name];
-        map.removeLayer(circle);
-      }
-      
-    });
-  var latestLoc = null;
-  navigator.geolocation.watchPosition(
-    function(location) {
-      latestLoc = location;
-      $.post(update_url, {user : user, loc : location});
-    });
-
-  setTimeout(
-    function() {
-      $.post(update_url, {user : user, loc : latestLoc});
-    },
-    1000);
-
-   */
+  room.on("trends",
+         function(new_trends) {
+           trends = new_trends;
+         });
+  
+  
 }

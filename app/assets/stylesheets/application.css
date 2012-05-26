@@ -3,19 +3,10 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
+ *= require twitter/bootstrap
  *= require_tree . 
 */
 
-/*
-body {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-}
-html {
-	height: 100%;
-};
-*/
 #mapbox {
     position:absolute;
     top:0;
@@ -24,4 +15,7 @@ html {
     right:0;
     margin: 0;
     padding: 0;
+    z-index:-1;
 }
+
+

@@ -7,6 +7,9 @@ gem 'oauth'
 gem 'eventmachine'
 gem 'em-http-request'
 gem 'yajl-ruby'
+gem 'less'
+gem 'less-rails-bootstrap'
+gem 'therubyracer'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'

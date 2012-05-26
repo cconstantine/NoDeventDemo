@@ -41,24 +41,29 @@ namespace :datastream  do
       config.oauth_token_secret = auth_conf['oauth_token_secret']
     end
     
-    time = Time.now
-    trending = nil
-    trending = Twitter.trends.map &:name
-    p trending
+    def update_trending
+      trending = Twitter.trends
+      $redis.set("twitter:trends", trending.to_json)
+      NoDevent::Emitter.emit("twitter", "trends", trending)
 
-    TweetStream::Client.new.filter(:locations => '-180,-90,180,90'
-                                   #:track => trending.join(",")
-                                   )  do |status|
+      trending = trending.map &:name
+      p trending
+      return trending
+    end
+
+    time = Time.now
+    trending = update_trending
+
+
+    TweetStream::Client.new.filter(:locations => '-180,-90,180,90')  do |status|
       begin
         next unless status.coordinates.present?
-        status[:is_trending] = trending.any? do |x| status.text.include?(x) end
-        
-        NoDevent::Emitter.emit("tweets", "tweet", status)
-        if time + 5.minutes < Time.now
-          trending = Twitter.trends.map &:name
-          time = Time.now
+        status[:is_trending] = trending.map{|x| x if status.text.include?(x)}.compact
 
-          p trending
+        NoDevent::Emitter.emit("twitter", "tweet", status)
+        if time + 5.minutes < Time.now
+          trending = update_trending
+          time = Time.now
         end
       rescue
         p $!
