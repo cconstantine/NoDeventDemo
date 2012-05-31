@@ -9,6 +9,24 @@
 //= require_tree .
 var map = null;
 var lastStatus;
+
+function selectTweet(status) {
+  $("#name").html(status.user.name);
+  var text = status.text;
+  if (status.entities.urls.length > 0) {
+    var urls = status.entities.urls;
+    for(var i = urls.length - 1;i >= 0;--i) {
+      var url = status.entities.urls[i];
+      text = text.slice(0, url.indices[0]) +
+        '<a target="_blank" href=' +
+        '"'+url.expanded_url+'">' +
+        url.display_url + "</a>" +
+        text.slice(url.indices[1]);
+      console.log(text);
+    }
+  }
+  $("#tweet").html(text);
+}
 function onJoin(name, room) {
   var TweetIcon = L.Icon.extend({options : {
                                    iconUrl: null,
@@ -45,13 +63,19 @@ function onJoin(name, room) {
   var trendingTweets = [];
   room.on("tweet",
          function(status) {
-           lastStatus = status;
+           if (lastStatus == null) {// && status.entities.urls.length > 0) {
+             selectTweet(status);
+             lastStatus = status;
+
+           }
            
            var latlng = new L.LatLng(status.coordinates.coordinates[1], status.coordinates.coordinates[0]);
            var icon = status.is_trending.length > 0 ? new TweetIconTrending : new TweetIcon();
            var location = new L.Marker(latlng, {icon: icon});
-                      
-           location.bindPopup(status.text);
+           location.on('click', function(e) {
+                         selectTweet(status);
+                  });
+
            map.addLayer(location);
            if (status.is_trending.length == 0) {
              tweets.push(location);
