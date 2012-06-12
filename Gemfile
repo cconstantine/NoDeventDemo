@@ -12,6 +12,7 @@ gem 'less-rails-bootstrap'
 gem 'therubyracer'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'backbone-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
