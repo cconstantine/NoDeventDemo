@@ -10,6 +10,8 @@ gem 'yajl-ruby'
 gem 'less'
 gem 'less-rails-bootstrap'
 gem 'therubyracer'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'

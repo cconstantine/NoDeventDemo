@@ -46,5 +46,11 @@ module Testrails
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    auth_conf = YAML::load(File.open("/etc/twitter.yml"))[Rails.env]
+    config.middleware.use OmniAuth::Builder do
+      provider :twitter, auth_conf['consumer_key'], auth_conf['consumer_secret']
+    end
+        
   end
 end
