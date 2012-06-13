@@ -6,8 +6,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require backbone-rails
+//= require_tree .
 
 var map = null;
 var lastStatus;
