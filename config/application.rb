@@ -51,6 +51,5 @@ module Testrails
     config.middleware.use OmniAuth::Builder do
       provider :twitter, auth_conf['consumer_key'], auth_conf['consumer_secret']
     end
-        
   end
 end

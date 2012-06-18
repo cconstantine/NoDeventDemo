@@ -3,9 +3,27 @@ require 'twitter'
 
 auth_conf = YAML::load(File.open("/etc/twitter.yml"))[Rails.env]
 
+=begin
+             hashes = status.entities.hashtags.map do |hashtag|
+          hash = (hashtag["text"].downcase)
+          trend = Trend.find_or_create_by_text hash
+          trend.count += 1 
+          trend.save!
+          
+          if trend.count > 100
+            Trend.update_all('count = count / 2')
+            Trend.where(:count => 0).delete_all
+            
+            trending = Set.new(Trend.order('count desc').limit(10).map &:text)
+            NoDevent::Emitter.emit("trending", "updated_trending", trending)
+          end
+          hash
+        end.to_set
+=end
+
 namespace :datastream  do
-  desc 'Connect to twitter'
-  task :auth do
+  desc "create some data"
+  task :firehose => :environment do
     require 'trend'
 
     TweetStream.configure do |config|
@@ -23,24 +41,6 @@ namespace :datastream  do
       config.oauth_token =        auth_conf['oauth_token']
       config.oauth_token_secret = auth_conf['oauth_token_secret']
     end
-  end
-
-  task :userstream do
-    client = TweetStream::Client.new
-    
-    client.userstream do |status|
-      puts status.inspect
-    end
-  end
-  task :sitestream do
-    client = TweetStream::Client.new
-    
-    client.sitestream(['115192457'], :followings => true) do |status|
-      puts status.inspect
-    end
-  end
-  desc "create some data"
-  task :firehose => [:environment, :auth] do
     
     def update_trending
       trending = Twitter.trends
@@ -54,12 +54,15 @@ namespace :datastream  do
 
     time = Time.now
     trending = update_trending
-
-
-    TweetStream::Client.new.filter(:locations => '-180,-90,180,90')  do |status|
+    
+    TweetStream::Client.new.on_error do |message|
+      p message
+    end.filter(:locations => '-180,-90,180,90')  do |status|
       begin
-        next unless status.coordinates.present?
-        status[:is_trending] = trending.map{|x| x if status.text.include?(x)}.compact
+        next unless status.geo.try(:coordinates).present?
+        
+        s = status.as_json
+        s[:is_trending] = trending.map{|x| x if status.text.include?(x)}.compact
 
         NoDevent::Emitter.emit("twitter", "tweet", status)
         if time + 5.minutes < Time.now

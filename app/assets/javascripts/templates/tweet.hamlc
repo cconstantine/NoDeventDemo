@@ -1,0 +1,10 @@
+.hero-unit
+  %strong#name
+    = @name
+  %p#tweet
+    - for span in @spans 
+      - if span.href
+        %a{ :href => span.href, :target => '_' }
+          = span.display
+      - else
+        = span

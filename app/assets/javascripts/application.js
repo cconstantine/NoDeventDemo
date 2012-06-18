@@ -5,30 +5,21 @@
 // the compiled file.
 //
 //= require jquery
+//= require hamlcoffee
+
 //= require jquery_ujs
 //= require backbone-rails
 //= require_tree .
 
 var map = null;
-var lastStatus;
+var tv = new TweetView();
 
+var selectedTweet;
 function selectTweet(status) {
-  $("#name").html(status.user.name);
-  var text = status.text;
-  if (status.entities.urls.length > 0) {
-    var urls = status.entities.urls;
-    for(var i = urls.length - 1;i >= 0;--i) {
-      var url = status.entities.urls[i];
-      text = text.slice(0, url.indices[0]) +
-        '<a target="_blank" href=' +
-        '"'+url.expanded_url+'">' +
-        url.display_url + "</a>" +
-        text.slice(url.indices[1]);
-      console.log(text);
-    }
-  }
-  $("#tweet").html(text);
+  selectedTweet = status;
+  tv.update(new Tweet(status).toJSON());
 }
+
 function onJoin(name, room) {
   var TweetIcon = L.Icon.extend({options : {
                                    iconUrl: null,
@@ -65,9 +56,9 @@ function onJoin(name, room) {
   var trendingTweets = [];
   room.on("tweet",
          function(status) {
-           if (lastStatus == null) {// && status.entities.urls.length > 0) {
+           if (selectedTweet == null) {// && status.entities.urls.length > 0) {
              selectTweet(status);
-             lastStatus = status;
+             selectedTweet = status;
 
            }
            
