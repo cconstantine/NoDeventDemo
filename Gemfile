@@ -26,6 +26,7 @@ gem "nodevent"
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
+  gem 'haml_coffee_assets'
   gem 'uglifier'
 end
 
