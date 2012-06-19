@@ -1,3 +1,5 @@
+
+#= require backbone-rails
 class Tweet extends Backbone.Model
   initialize: (status) ->
     @status = status

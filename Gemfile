@@ -14,12 +14,16 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'backbone-rails'
 gem 'ejs'
+gem 'jquery-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
 gem "nodevent"
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -39,16 +43,23 @@ group :development do
     gem 'rvm-capistrano'
 end
 
-group :production do
-    gem 'unicorn'
+# Gemfile
+group :development, :test do
+  gem 'capybara-webkit'
+
+  gem 'jasmine-rails'
+  #gem 'evergreen', :require => 'evergreen/rails'
+#  gem 'jasminerice'
+#  gem 'jasmine-headless-webkit'
 end
-
-gem 'jquery-rails'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
 
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
+
+group :production do
+    gem 'unicorn'
+end
+
+

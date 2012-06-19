@@ -58,4 +58,8 @@ Testrails::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
 
   match '/auth/:provider/callback', to: 'sessions#create'
+
+  mount JasmineRails::Engine => "/jasmine" unless Rails.env.production?
+
 end
+
