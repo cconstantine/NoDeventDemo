@@ -94,5 +94,10 @@ function onJoin(name, room) {
     function() {
       console.log("DISCONNECTED");
     });
+  NoDevent.socket.on(
+    'connect',
+    function() {
+      console.log("CONNECTED");
+    });
   
 }
