@@ -89,5 +89,10 @@ function onJoin(name, room) {
            trends = new_trends;
          });
   
+  NoDevent.socket.on(
+    'disconnect',
+    function() {
+      console.log("DISCONNECTED");
+    });
   
 }
