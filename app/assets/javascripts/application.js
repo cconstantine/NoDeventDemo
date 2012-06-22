@@ -95,9 +95,44 @@ function onJoin(name, room) {
       console.log("DISCONNECTED");
     });
   NoDevent.socket.on(
+    'connecting',
+    function(type) {
+      console.log("connecting: " + type);
+    });
+  NoDevent.socket.on(
     'connect',
     function() {
       console.log("CONNECTED");
+    });
+  NoDevent.socket.on(
+    'connect_failed',
+    function() {
+      console.log("connect_failed");
+    });
+  NoDevent.socket.on(
+    'reconnect_failed',
+    function() {
+      console.log("reconnect_failed");
+    });
+  NoDevent.socket.on(
+    'reconnecting',
+    function(delay, attempts) {
+      console.log("reconnecting: " + delay + ", " + attempts);
+    });
+  NoDevent.socket.on(
+    'reconnect',
+    function(type, attempts) {
+      console.log("reconnect: " + type + ", " + attempts);
+    });
+  NoDevent.socket.on(
+    'reconnect_failed',
+    function() {
+      console.log("reconnect_failed");
+    });
+  NoDevent.socket.on(
+    'close',
+    function() {
+      console.log("close");
     });
   
 }
