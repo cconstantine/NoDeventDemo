@@ -34,7 +34,7 @@ group :assets do
   gem 'haml_coffee_assets'
   gem 'uglifier'
   gem 'jquery-ui-rails'
-
+  gem 'i18n'
 end
 
 
