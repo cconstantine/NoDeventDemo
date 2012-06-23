@@ -34,7 +34,12 @@ $(function(){
                    map.addLayer(new wax.leaf.connector(tilejson));
                  });
   });
+var joined = false;
 function onJoin(room) {
+  if (joined)
+    return;
+
+  joined = true;
   var TweetIcon = L.Icon.extend({options : {
                                    iconUrl: null,
                                    shadowUrl: null,
