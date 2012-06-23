@@ -9,7 +9,7 @@ set :git_shallow_clone, 1
 set :deploy_to, "/var/www/nodevent"
 default_run_options[:pty] = true
 
-set :rvm_ruby_string, '1.9.2-p318@nodevent'
+set :rvm_ruby_string, 'ruby-1.9.3-p125@nodeventdemo'
 set :rvm_install_ruby, :install
 require "rvm/capistrano"
 
