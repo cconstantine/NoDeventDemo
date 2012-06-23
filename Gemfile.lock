@@ -266,6 +266,7 @@ DEPENDENCIES
   eventmachine
   haml-rails
   haml_coffee_assets
+  i18n
   jasmine-rails
   jquery-rails
   jquery-ui-rails
