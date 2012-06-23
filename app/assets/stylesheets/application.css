@@ -2,10 +2,11 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
  *= require twitter/bootstrap
  *= require_tree . 
 */
+
+//= require twitter/bootstrap
 
 #mapbox {
     position:absolute;
@@ -27,4 +28,25 @@ div.hero-unit {
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.top-error {
+    display: block;
+    top: 0;
+    width: 150px;
+    margin-left: auto;
+    margin-right:  auto;
+}
+#error-box {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+
+}
+.right {
+    float: right;
+}
+
+.reload {
+    cursor:pointer;
 }

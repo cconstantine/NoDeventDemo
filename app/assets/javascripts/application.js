@@ -8,6 +8,8 @@
 //= require hamlcoffee
 
 //= require jquery_ujs
+//= require jquery.ui.all
+
 //= require backbone-rails
 //= require_tree .
 
@@ -19,8 +21,21 @@ function selectTweet(status) {
   selectedTweet = status;
   tv.update(new Tweet(status).toJSON());
 }
-
-function onJoin(name, room) {
+$(function(){
+    // Define the map to use from MapBox
+    // This is the TileJSON endpoint copied from the embed button on your map
+    var url = 'http://a.tiles.mapbox.com/v3/cconstantine.map-gyhx1cl1.jsonp';
+    
+    // Make a new Leaflet map in your container div
+    map = new L.Map('mapbox').setView(new L.LatLng(39.572, -95.449), 3);
+    
+    // Get metadata about the map from MapBox
+    wax.tilejson(url, function(tilejson) {
+                   map.addLayer(new wax.leaf.connector(tilejson));
+                 });
+  });
+function onJoin(room) {
+  console.log('onJoin');
   var TweetIcon = L.Icon.extend({options : {
                                    iconUrl: null,
                                    shadowUrl: null,
@@ -40,20 +55,9 @@ function onJoin(name, room) {
                                          }
                                         });
   
-  // Define the map to use from MapBox
-  // This is the TileJSON endpoint copied from the embed button on your map
-  var url = 'http://a.tiles.mapbox.com/v3/cconstantine.map-gyhx1cl1.jsonp';
-  
-  // Make a new Leaflet map in your container div
-  map = new L.Map('mapbox').setView(new L.LatLng(39.572, -95.449), 3);
-  
-  // Get metadata about the map from MapBox
-  wax.tilejson(url, function(tilejson) {
-                 map.addLayer(new wax.leaf.connector(tilejson));
-               });
-
   var tweets = [];
   var trendingTweets = [];
+
   room.on("tweet",
          function(status) {
            if (selectedTweet == null) {// && status.entities.urls.length > 0) {
@@ -88,51 +92,4 @@ function onJoin(name, room) {
          function(new_trends) {
            trends = new_trends;
          });
-  
-  NoDevent.socket.on(
-    'disconnect',
-    function() {
-      console.log("DISCONNECTED");
-    });
-  NoDevent.socket.on(
-    'connecting',
-    function(type) {
-      console.log("connecting: " + type);
-    });
-  NoDevent.socket.on(
-    'connect',
-    function() {
-      console.log("CONNECTED");
-    });
-  NoDevent.socket.on(
-    'connect_failed',
-    function() {
-      console.log("connect_failed");
-    });
-  NoDevent.socket.on(
-    'reconnect_failed',
-    function() {
-      console.log("reconnect_failed");
-    });
-  NoDevent.socket.on(
-    'reconnecting',
-    function(delay, attempts) {
-      console.log("reconnecting: " + delay + ", " + attempts);
-    });
-  NoDevent.socket.on(
-    'reconnect',
-    function(type, attempts) {
-      console.log("reconnect: " + type + ", " + attempts);
-    });
-  NoDevent.socket.on(
-    'reconnect_failed',
-    function() {
-      console.log("reconnect_failed");
-    });
-  NoDevent.socket.on(
-    'close',
-    function() {
-      console.log("close");
-    });
-  
 }

@@ -15,6 +15,7 @@ gem 'omniauth-twitter'
 gem 'backbone-rails'
 gem 'ejs'
 gem 'jquery-rails'
+gem "haml-rails"
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -32,6 +33,8 @@ group :assets do
   gem 'coffee-rails'
   gem 'haml_coffee_assets'
   gem 'uglifier'
+  gem 'jquery-ui-rails'
+
 end
 
 
