@@ -10,9 +10,7 @@
     NoDevent.ready(
       function() {
         page_events();
-        NoDevent.socket.on("connect", function () {
-          NoDevent.join(roomname, onJoin);
-          });
+        NoDevent.join(roomname, onJoin);
         });
 
 %a{:href => "https://github.com/cconstantine/NoDeventDemo"}

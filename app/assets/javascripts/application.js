@@ -35,7 +35,6 @@ $(function(){
                  });
   });
 function onJoin(room) {
-  console.log('onJoin');
   var TweetIcon = L.Icon.extend({options : {
                                    iconUrl: null,
                                    shadowUrl: null,
