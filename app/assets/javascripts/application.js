@@ -75,7 +75,6 @@ function onReady(room_name) {
                 var icon = status.is_trending.length > 0 ? new TweetIconTrending() : new TweetIcon();
                 var location = new L.Marker(latlng, {icon: icon});
                 location.on('click', function(e) {
-                              console.log(this, e);
                               clicked = this;
                               selectTweet(status, location);
                             });
