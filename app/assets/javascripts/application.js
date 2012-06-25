@@ -13,11 +13,18 @@
 //= require backbone-rails
 //= require_tree .
 
+var clicked = null;
+
 var map = null;
 var tv = new TweetView();
 
 var selectedTweet;
-function selectTweet(status) {
+function selectTweet(status, location) {
+  setTimeout(function() {
+               if (selectedTweet != status) {
+                 map.removeLayer( location); 
+               }
+             }, 10000);
   selectedTweet = status;
   tv.update(new Tweet(status).toJSON());
 }
@@ -34,12 +41,8 @@ $(function(){
                    map.addLayer(new wax.leaf.connector(tilejson));
                  });
   });
-var joined = false;
-function onJoin(room) {
-  if (joined)
-    return;
 
-  joined = true;
+function onReady(room_name) { 
   var TweetIcon = L.Icon.extend({options : {
                                    iconUrl: null,
                                    shadowUrl: null,
@@ -59,41 +62,39 @@ function onJoin(room) {
                                          }
                                         });
   
-  var tweets = [];
-  var trendingTweets = [];
-
-  room.on("tweet",
-         function(status) {
-           if (selectedTweet == null) {// && status.entities.urls.length > 0) {
-             selectTweet(status);
-             selectedTweet = status;
-
-           }
-           
-           var latlng = new L.LatLng(status.coordinates.coordinates[1], status.coordinates.coordinates[0]);
-           var icon = status.is_trending.length > 0 ? new TweetIconTrending : new TweetIcon();
-           var location = new L.Marker(latlng, {icon: icon});
-           location.on('click', function(e) {
-                         selectTweet(status);
-                  });
-
-           map.addLayer(location);
-           if (status.is_trending.length == 0) {
-             tweets.push(location);
-             if (tweets.length > 100) {
-               map.removeLayer( tweets.shift());
-             }
-           } else {
-             trendingTweets.push(location);
-             if (trendingTweets.length > 100) {
-               map.removeLayer( trendingTweets.shift());
-             }
-           }
-             
-         });
-
-  room.on("trends",
-         function(new_trends) {
-           trends = new_trends;
-         });
+  page_events();
+  NoDevent.join(
+    room_name,
+    function() {
+      var room = NoDevent.room(room_name);
+      
+      room.on("tweet",
+              function(status) {
+                
+                var latlng = new L.LatLng(status.coordinates.coordinates[1], status.coordinates.coordinates[0]);
+                var icon = status.is_trending.length > 0 ? new TweetIconTrending() : new TweetIcon();
+                var location = new L.Marker(latlng, {icon: icon});
+                location.on('click', function(e) {
+                              console.log(this, e);
+                              clicked = this;
+                              selectTweet(status, location);
+                            });
+                map.addLayer(location);
+                
+                if (selectedTweet == null) {
+                  selectTweet(status, location);
+                }
+                
+                setTimeout(function() {
+                        if (selectedTweet != status) {
+                          map.removeLayer( location); 
+                        }
+                           }, 10000);
+              });
+      
+      room.on("trends",
+              function(new_trends) {
+                trends = new_trends;
+              });
+    });
 }

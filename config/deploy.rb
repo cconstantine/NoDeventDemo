@@ -27,7 +27,6 @@ before "deploy:create_symlink",    "nodevent:deploy_assets", "deploy:migrate"
 
 #Bundler
 set :bundle_dir,          fetch(:shared_path)+"/bundle"
-set :bundle_flags,       "--deployment --quiet"
 
 #Servers
 role :app, "ec2-75-101-164-22.compute-1.amazonaws.com"

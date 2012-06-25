@@ -3,15 +3,9 @@
 
 - content_for :js do
   :javascript
-    var theroom = null;
     var trends = #{ @trends.html_safe };
-    var update_url = '#{ public_path }';
     var roomname = '#{ NoDevent::Emitter.room("twitter") }';
-    NoDevent.ready(
-      function() {
-        page_events();
-        NoDevent.join(roomname, onJoin);
-        });
+    NoDevent.ready(function() {onReady(roomname);});
 
 %a{:href => "https://github.com/cconstantine/NoDeventDemo"}
   %img{:style => "position: absolute; top: 0; right: 0; border: 0;",
