@@ -1,11 +1,6 @@
-- content_for(:head) do
-  = javascript_include_nodevent
-
 - content_for :js do
   :javascript
     var trends = #{ @trends.html_safe };
-    var roomname = '#{ NoDevent::Emitter.room("twitter") }';
-    NoDevent.ready(function() {onReady(roomname);});
 
 %a{:href => "https://github.com/cconstantine/NoDeventDemo"}
   %img{:style => "position: absolute; top: 0; right: 0; border: 0;",
@@ -13,12 +8,5 @@
        :alt=>"Fork me on GitHub"}
 
 #mapbox
-
-.top-error
-  #error-box.alert.alert-error
-    %span.message
-      Loading...
-    .right
-      .icon-repeat.reload{:title => "Reload"}
 
 .grid4.span4.bottombar.tweetbox

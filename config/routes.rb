@@ -59,7 +59,7 @@ Testrails::Application.routes.draw do
 
   match '/auth/:provider/callback', to: 'sessions#create'
 
-  mount JasmineRails::Engine => "/jasmine" unless Rails.env.production?
+#  mount JasmineRails::Engine => "/jasmine" unless Rails.env.production?
 
 end
 

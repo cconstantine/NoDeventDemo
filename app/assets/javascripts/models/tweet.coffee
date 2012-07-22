@@ -27,3 +27,42 @@ class Tweet extends Backbone.Model
     {name : @name(), spans : @spans()}
 
 window.Tweet = Tweet
+
+room = NoDevent.room('twitter')
+room.join()
+selectedTweet = null;
+
+
+room.on "tweet",(status) ->
+  latlng = new L.LatLng(status.coordinates.coordinates[1], status.coordinates.coordinates[0])
+  icon = if status.is_trending.length > 0 then new TweetIconTrending() else new TweetIcon()
+
+  location = new L.Marker(latlng, {icon: icon})
+  location.on 'click', (e) ->
+    setTimeout () ->
+      if selectedTweet != status
+        window.map.removeLayer( location)
+    , 10000
+    selectedTweet = status;
+    tv.update(new Tweet(status).toJSON())
+
+
+  window.map.addLayer(location)
+
+  if selectedTweet == null
+    setTimeout () ->
+      if selectedTweet != status
+        window.map.removeLayer( location)
+    , 10000
+    selectedTweet = status;
+    tv.update(new Tweet(status).toJSON())
+
+
+  setTimeout ()->
+    if selectedTweet != status
+      map.removeLayer(location)
+  , 10000
+
+
+room.on "trends", (new_trends) ->
+  trends = new_trends

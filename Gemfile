@@ -21,7 +21,7 @@ gem "haml-rails"
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem "nodevent"
+gem "nodevent"#, :path => '../nodevent/gem/nodevent'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -50,7 +50,8 @@ end
 group :development, :test do
   gem 'capybara-webkit'
 
-  gem 'jasmine-rails'
+  gem 'headless'
+  gem 'jasmine'
   #gem 'evergreen', :require => 'evergreen/rails'
 #  gem 'jasminerice'
 #  gem 'jasmine-headless-webkit'

@@ -5,13 +5,4 @@ class PublicController < ApplicationController
     @user = session[:user]
     @trends = $redis.get('twitter:trends')
   end
-
-  def create
-    NoDevent::Emitter.emit(
-                           'theroom',
-                           'location',
-                           { :user => session[:user],
-                             :loc  => params[:loc]}) 
-    render :text => 'OK'
-  end
 end
