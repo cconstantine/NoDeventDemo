@@ -1,15 +1,7 @@
-class User < ActiveRecord::Base
-  attr_accessible :username, :password, :password_confirmation, :cid
-  has_secure_password
-
-  validates_presence_of :password, :on => :create
-  validates_presence_of :username
-
-  validates_uniqueness_of :username
-
+class Discussion < ActiveRecord::Base
+  attr_accessible :body, :subject
 
   include NoDevent
-
   after_create :nodevent_create
   after_update :nodevent_update
 

@@ -1,0 +1,7 @@
+.hero-unit
+  %strong#name
+    Subject:
+    = @subject
+  %p
+    Body:
+    = @body

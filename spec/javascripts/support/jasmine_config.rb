@@ -25,7 +25,7 @@ end
 
 require 'sprockets'
 require 'haml_coffee_assets'
-p 'hi'
+
 Jasmine::Headless.register_engine '.hamlc', HamlCoffeeAssets::HamlCoffeeTemplate
 
 # this routine compiles and runs the hamlcoffee.js.coffee.erb and makes

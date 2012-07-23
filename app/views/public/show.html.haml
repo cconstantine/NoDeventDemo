@@ -1,12 +1,20 @@
-- content_for :js do
-  :javascript
-    var trends = #{ @trends.html_safe };
+:javascript
+  $(function() {
+    discussions = new DiscussionCollection(#{@discussions.to_json.html_safe})
+    discussions_view_list = new DiscussionListView({collection : discussions})
+  });
 
-%a{:href => "https://github.com/cconstantine/NoDeventDemo"}
-  %img{:style => "position: absolute; top: 0; right: 0; border: 0;",
-       :src => "https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png",
-       :alt=>"Fork me on GitHub"}
 
-#mapbox
+= form_for @new_discussion, :format => :json, :method => :post, :remote => true do |f|
+  %p
+    = f.label :subject
+    %br
+    = f.text_field :subject, :required => true
+  %p
+    = f.label :body
+    %br
+    = f.text_field  :body, :required => true
 
-.grid4.span4.bottombar.tweetbox
+  = f.submit("Save")
+
+.discussions-list

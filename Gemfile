@@ -1,12 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails'
-gem 'twitter'
-gem 'tweetstream'
-gem 'oauth'
-gem 'eventmachine'
-gem 'em-http-request'
-gem 'yajl-ruby'
+
 gem 'less'
 gem 'less-rails-bootstrap'
 gem 'therubyracer'
@@ -16,12 +11,12 @@ gem 'backbone-rails'
 gem 'ejs'
 gem 'jquery-rails'
 gem "haml-rails"
+gem 'coffee-filter'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+gem 'pg'
+gem 'bcrypt-ruby'
 
-gem 'sqlite3'
-gem "nodevent"#, :path => '../nodevent/gem/nodevent'
+gem "nodevent", :path => '../nodevent/gem/nodevent'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -48,10 +43,10 @@ end
 
 # Gemfile
 group :development, :test do
-  gem 'capybara-webkit'
+  #gem 'capybara-webkit'
 
-  gem 'headless'
-  gem 'jasmine'
+  #gem 'headless'
+  #gem 'jasmine'
   #gem 'evergreen', :require => 'evergreen/rails'
 #  gem 'jasminerice'
 #  gem 'jasmine-headless-webkit'
@@ -60,6 +55,10 @@ end
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
+  gem 'rr'
+  gem 'rspec-mocks'
+  gem 'rspec-rails'
+  gem 'fixture_builder'
 end
 
 group :production do

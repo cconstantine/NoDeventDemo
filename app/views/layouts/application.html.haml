@@ -8,13 +8,22 @@
     = csrf_meta_tags
     = yield :head
     = yield :js
-  %body
+    :coffeescript
+      u = #{ current_user.to_json.html_safe }
+      if u?
+        User.current_user = new User(u)
 
+  %body
     .top-error
       #error-box.alert.alert-error
         %span.message
           Loading...
         .right
           .icon-repeat.reload{:title => "Reload"}
+
+    %a{:href => "https://github.com/cconstantine/NoDeventDemo"}
+      %img{:style => "position: absolute; top: 0; right: 0; border: 0;",
+           :src => "https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png",
+           :alt=>"Fork me on GitHub"}
 
     = yield

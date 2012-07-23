@@ -11,16 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525065525) do
+ActiveRecord::Schema.define(:version => 20120723063527) do
 
-  create_table "trends", :force => true do |t|
-    t.integer  "count",      :default => 0
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "discussions", :force => true do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "trends", ["count"], :name => "index_trends_on_count"
-  add_index "trends", ["text"], :name => "index_trends_on_text"
+  create_table "users", :force => true do |t|
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "username",        :null => false
+    t.string   "password_digest", :null => false
+  end
+
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

@@ -1,16 +1,16 @@
 development: &development
   host: 'http://localhost:8080'
-  namespace: 'nodevent'
+  namespace: '/nodevent'
 
 test: &test
   host: 'http://ec2-75-101-164-22.compute-1.amazonaws.com:8080'
-  namespace: 'nodevent'
+  namespace: '/nodevent'
 
 cucumber:
   <<: *test
 
 production:
   host: 'http://ec2-75-101-164-22.compute-1.amazonaws.com:8080'
-  namespace: 'nodevent'
+  namespace: '/nodevent'
   
 

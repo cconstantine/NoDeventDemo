@@ -1,8 +1,7 @@
 class PublicController < ApplicationController
 
   def show
-    #session[:user] ||= {:name => ActiveSupport::SecureRandom.hex(16)}
-    @user = session[:user]
-    @trends = $redis.get('twitter:trends')
+    @discussions = Discussion.order('id desc').limit(10).reverse
+    @new_discussion = Discussion.new
   end
 end
