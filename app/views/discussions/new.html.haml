@@ -1,0 +1,26 @@
+:javascript
+  $(function() {
+    discussions = new DiscussionCollection(#{@discussions.to_json.html_safe})
+    discussions_view_list = new DiscussionListView({collection : discussions})
+    $("#new_discussion").bind("ajax:success", function(xhr, data, status) {
+      console.log("success");
+      $("#new_discussion #discussion_body").val('');
+    });
+    $("#new_discussion").bind("ajax:error", function(xhr, data, status) {
+      console.log("success");
+    });
+
+  });
+
+
+= form_for @discussion, :format => :json, :method => :post, :remote => true do |f|
+  %p
+    = f.label :username
+    = f.text_field :username, :required => true
+  %p
+    = f.label :body
+    = f.text_field  :body, :required => true
+
+  = f.submit("Save")
+
+.discussions-list

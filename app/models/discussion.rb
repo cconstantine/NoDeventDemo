@@ -1,19 +1,15 @@
 class Discussion < ActiveRecord::Base
-  attr_accessible :body, :subject
+  attr_accessible :username, :body
 
-  include NoDevent
+  include NoDevent::Base
+
   after_create :nodevent_create
   after_update :nodevent_update
 
+  validates_presence_of :username, :body
+
   def as_json(options={})
-    super(options.merge(:except => :password_digest)).merge(:nodevent => {:room => room})
+    super(options).merge(:nodevent => {:room => room})
   end
 
-  def nodevent_create
-    NoDevent::Emitter.emit(self.class, 'create', self)
-  end
-
-  def nodevent_update
-    self.emit('update')
-  end
 end

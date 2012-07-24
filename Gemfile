@@ -12,11 +12,12 @@ gem 'ejs'
 gem 'jquery-rails'
 gem "haml-rails"
 gem 'coffee-filter'
+gem 'rails-timeago'
 
 gem 'pg'
 gem 'bcrypt-ruby'
 
-gem "nodevent", :path => '../nodevent/gem/nodevent'
+gem "nodevent"#, :path => '../nodevent/gem/nodevent'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

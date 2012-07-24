@@ -7,4 +7,6 @@ class this.DiscussionView extends Backbone.View
     @render()
 
   render: ->
-    @$el.html(@template(@discussion.toJSON()))
+    r = @$el.html(@template(@discussion.toJSON()))
+    $(r).find("abbr.timeago").timeago()
+    r

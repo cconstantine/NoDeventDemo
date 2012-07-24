@@ -8,20 +8,12 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
 
 
-  include NoDevent
+  include NoDevent::Base
 
   after_create :nodevent_create
   after_update :nodevent_update
 
   def as_json(options={})
     super(options.merge(:except => :password_digest)).merge(:nodevent => {:room => room})
-  end
-
-  def nodevent_create
-    NoDevent::Emitter.emit(self.class, 'create', self)
-  end
-
-  def nodevent_update
-    self.emit('update')
   end
 end

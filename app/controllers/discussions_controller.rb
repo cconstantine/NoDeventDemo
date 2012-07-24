@@ -1,6 +1,7 @@
 class DiscussionsController < ApplicationController
   def new
-    @discussion = Discussion.new.reverse
+    @discussions = Discussion.order('id desc').limit(10).reverse
+    @discussion  = Discussion.new(:username => session[:username])
   end
 
   def show
@@ -14,6 +15,7 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = Discussion.new(params[:discussion])
     if @discussion.save
+      session[:username] = params[:discussion][:username]
       respond_to do |format|
         format.html { redirect_to discussion_path(@discussion) }
         format.json { render :json =>  @discussion }

@@ -1,7 +1,6 @@
 Testrails::Application.routes.draw do
 
-  root :to => 'public#show'
-  resource :public, :controller => :public
+  root :to => 'discussions#new'
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"

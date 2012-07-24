@@ -1,7 +1,7 @@
 ---
 default:
-  id: 3
-  created_at: 2012-07-23 02:05:50.687514000 Z
-  updated_at: 2012-07-23 02:05:50.687514000 Z
+  id: 4
+  created_at: 2012-07-24 08:33:43.997923000 Z
+  updated_at: 2012-07-24 08:33:43.997923000 Z
   username: cconstantine
-  password_digest: $2a$10$fvlQv5aOo04.gKFEyWb4OOZF6g7WzCTt.Zg6ZJJuxngJObjMRQQPa
+  password_digest: $2a$10$HPhVKb.qUXy0g6Ye5gIDIujzCatdyKmyJea1Jm3n2MpWOyXkwxg1G

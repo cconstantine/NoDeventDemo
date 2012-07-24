@@ -10,6 +10,7 @@
 #= require jquery_ujs
 #= require jquery.ui.all
 
+#= require rails-timeago
+
 #= require backbone-rails
 #= require_tree .
-
