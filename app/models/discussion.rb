@@ -6,10 +6,13 @@ class Discussion < ActiveRecord::Base
   after_create :nodevent_create
   after_update :nodevent_update
 
-  validates_presence_of :username, :body
+  belongs_to :user
+
+  validates_presence_of :user, :body
 
   def as_json(options={})
-    super(options).merge(:nodevent => {:room => room})
+
+    super(options).merge(:nodevent => {:room => room}).merge(:user => user)
   end
 
 end

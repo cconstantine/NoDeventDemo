@@ -13,4 +13,5 @@
 #= require rails-timeago
 
 #= require backbone-rails
+#= require backbone-relational
 #= require_tree .

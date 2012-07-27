@@ -7,7 +7,7 @@ Testrails::Application.routes.draw do
   get "signup" => "users#new", :as => "signup"
 
   resources :users
-  resources :sessions
+  resource :sessions
   resources :discussions
 
 end

@@ -11,16 +11,30 @@
     });
 
   });
+.row
+  .span8.offset3
+    .well
+      .row
+        .span3
+          %h2 Post
+          = form_for @discussion, :class => "form-horizontal", :method => :post, :remote => true, :format => :json do |f|
+            %p
+              = f.text_area  :body, :required => true, :rows => 3
 
+            = f.submit("Post")
+        - if current_user.present?
+          .span3.logout
+            = button_to "Logout", sessions_path, :method => :delete
 
-= form_for @discussion, :format => :json, :method => :post, :remote => true do |f|
-  %p
-    = f.label :username
-    = f.text_field :username, :required => true
-  %p
-    = f.label :body
-    = f.text_field  :body, :required => true
+        - else
+          .span3.login
+            %h2 Login
+            = form_tag sessions_path(), :method => :post do
+              %p
+                = text_field_tag  :username, "", :required => true
+              %p
+                = text_field_tag  :password, "", :required => true
 
-  = f.submit("Save")
+              = submit_tag("Login")
 
-.discussions-list
+    .discussions-list

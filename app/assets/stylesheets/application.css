@@ -6,18 +6,7 @@
  *= require_tree . 
 */
 
-//= require twitter/bootstrap
-
-div.hero-unit {
-    padding: 10px;
-}
-.hero-unit {
-
-    .timestamp {
-        font-size: 12px;
-
-    }
-}
+//= require twitter/bootstrap-responsive
 
 
 .bottombar {
@@ -34,16 +23,22 @@ div.hero-unit {
     margin-left: auto;
     margin-right:  auto;
 }
+
 #error-box {
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 5px;
 
 }
-.right {
+
+.float-right {
     float: right;
 }
-
 .reload {
     cursor:pointer;
+}
+
+.well {
+    margin-bottom: 0px;
+    margin-top: 20px;
 }

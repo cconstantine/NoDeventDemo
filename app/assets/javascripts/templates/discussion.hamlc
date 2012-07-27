@@ -1,11 +1,20 @@
-.hero-unit
-  %strong#name
-    From:
-    = @username
-  %p
-    = @body
-  .timestamp
-    Posted:
-    %span
-      %abbr.timeago{title: @created_at}
-        = @created_at
+.row.show-grid
+  .span8.show-grid
+    .well
+      .float-right
+        %abbr.timeago{title: @created_at}
+          = @created_at
+      - if @user? && @user.username?
+        %strong#name
+          = @user.username
+      - else
+        %string#name
+          = JSON.stringify(@)
+          Anonymous
+      %p
+        = @body
+      .timestamp
+        Posted:
+        %span
+          %abbr.timeago{title: @created_at}
+            = @created_at
