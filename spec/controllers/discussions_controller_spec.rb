@@ -7,11 +7,11 @@ describe DiscussionsController do
 
     describe "with json" do
       let(:format) {"json"}
-      it "should not be allowed" do
+      it "should create a discussion" do
         expect {
           subject
-        }.to_not change {Discussion.count}
-        response.should_not be_success
+        }.to change {Discussion.count}.by(1)
+        response.should be_success
       end
     end
 

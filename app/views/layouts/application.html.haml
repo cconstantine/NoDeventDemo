@@ -8,10 +8,6 @@
     = csrf_meta_tags
     = yield :head
     = yield :js
-    :coffeescript
-      u = #{ current_user.to_json.html_safe }
-      if u?
-        User.current_user = new User(u)
 
   %body
     .top-error

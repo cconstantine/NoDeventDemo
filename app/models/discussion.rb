@@ -8,7 +8,7 @@ class Discussion < ActiveRecord::Base
 
   belongs_to :user
 
-  validates_presence_of :user, :body
+  validates_presence_of :body
 
   def as_json(options={})
 

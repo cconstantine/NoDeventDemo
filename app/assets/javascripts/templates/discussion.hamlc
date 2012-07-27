@@ -4,13 +4,12 @@
       .float-right
         %abbr.timeago{title: @created_at}
           = @created_at
-      - if @user? && @user.username?
-        %strong#name
+      %strong#name
+        - if @user? && @user.username?
           = @user.username
-      - else
-        %string#name
-          = JSON.stringify(@)
-          Anonymous
+        - else
+          %string#name
+            Anonymous
       %p
         = @body
       .timestamp

@@ -13,5 +13,18 @@
 #= require rails-timeago
 
 #= require backbone-rails
-#= require backbone-relational
 #= require_tree .
+
+window.NoDeventDemo = new Backbone.Model()
+
+NoDeventDemo.on "change:current_user", (user) ->
+  console.log "got"
+  console.log user.get("current_user")
+  if NoDeventDemo.get("current_user").get("username")?
+    console.log "showing logout"
+    $("#login").hide();
+    $("#logout").show();
+  else
+    console.log "showing login"
+    $("#login").show();
+    $("#logout").hide();

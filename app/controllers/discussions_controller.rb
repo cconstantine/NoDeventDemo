@@ -17,12 +17,6 @@ class DiscussionsController < ApplicationController
 
     if current_user.present?
       @discussion.user = current_user
-    else
-      respond_to do |format|
-        format.html { render "new"}
-        format.json { render :status => :unauthorized, :json =>  @discussion }
-      end
-      return
     end
     if @discussion.save
       respond_to do |format|

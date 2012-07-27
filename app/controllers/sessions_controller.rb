@@ -19,10 +19,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:user_id)
+    reset_session
+
     respond_to do |format|
         format.html { redirect_to root_path, :notice => "Logged out!" }
-        format.json { head :ok}
+        format.json { render :json => {}}
       end
   end
 
