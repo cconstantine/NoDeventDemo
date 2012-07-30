@@ -5,43 +5,19 @@
     NoDeventDemo.set("current_user", new User(#{current_user.to_json.html_safe}));
 
     $("#new_discussion").bind("ajax:success", function(xhr, data, status) {
-      console.log("success");
       $("#new_discussion #discussion_body").val('');
     });
 
     $(".session_form").parents("form").bind("ajax:success", function(xhr, data, status) {
-      console.log(xhr, data, status)
       window.NoDeventDemo.set("current_user", new User(data));
-
     });
   });
-.navbar
-  .navbar-inner
-    .container
-      = link_to "NoDeventDemo", root_path, :class => "brand"
-.row
-  .span8.offset3
-    .well
-      .row
-        .span3
-          %h2 Post
-          = form_for @discussion, :class => "form-horizontal", :method => :post, :remote => true, :format => :json do |f|
-            %p
-              = f.text_area  :body, :required => true, :rows => 3
-            = f.submit("Post")
+.well
+  %h2 Post
+  = form_for @discussion, :class => "form-horizontal", :method => :post, :remote => true, :format => :json do |f|
+    %p
+      = f.text_area  :body, :required => true, :rows => 3
+    = f.submit("Post")
 
-        #logout.span3
-          = button_to "Logout", sessions_path(:format => :json), :method => :delete, :class => "session_form", :remote => true
 
-        #login.span3
-          %h2 Login
-          = form_tag sessions_path(:format => :json), :method => :post, :remote => true do
-            .hidden.session_form
-            %p
-              = text_field_tag  :username, "", :required => true
-            %p
-              = text_field_tag  :password, "", :required => true, :type => :password
-
-            = submit_tag("Login")
-
-    .discussions-list
+.discussions-list

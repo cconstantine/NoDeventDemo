@@ -1,4 +1,4 @@
-jQuery ->
+$ ->
   if NoDevent.connected()
     $("#error-box").hide('puff', {}, 300);
 
