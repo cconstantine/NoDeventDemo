@@ -11,8 +11,7 @@ class Discussion < ActiveRecord::Base
   validates_presence_of :body
 
   def as_json(options={})
-
-    super(options).merge(:nodevent => {:room => room}).merge(:user => user)
+    super(options.merge({:include => :user})).merge(:nodevent => {:room => room})
   end
 
 end

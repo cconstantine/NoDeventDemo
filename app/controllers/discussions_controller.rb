@@ -1,4 +1,6 @@
 class DiscussionsController < ApplicationController
+  respond_to :json, :html
+
   def new
     @discussions = Discussion.order('id desc').limit(10).reverse
     @discussion  = Discussion.new()
@@ -14,20 +16,9 @@ class DiscussionsController < ApplicationController
 
   def create
     @discussion = Discussion.new(params[:discussion])
+    @discussion.user = current_user
+    @discussion.save
 
-    if current_user.present?
-      @discussion.user = current_user
-    end
-    if @discussion.save
-      respond_to do |format|
-        format.html { redirect_to discussion_path(@discussion) }
-        format.json { render :json =>  @discussion }
-      end
-    else
-      respond_to do |format|
-        format.html { render "new"}
-        format.json { render :status => :unauthorized, :json =>  @discussion }
-      end
-    end
+    respond_with @discussion
   end
 end
