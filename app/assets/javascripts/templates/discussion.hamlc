@@ -1,17 +1,12 @@
 .well
   .float-right
-    %abbr.timeago{title: @created_at}
+    %abbr.timeago{title: @get('created_at')}
       = @created_at
   %strong#name
-    - if @user? && @user.username?
-      = @user.username
+    - if @get('user')? && @get('user').username?
+      = @get('user').username?
     - else
       %string#name
         Anonymous
   %p
-    = @body
-  .timestamp
-    Posted:
-    %span
-      %abbr.timeago{title: @created_at}
-        = @created_at
+    = @get('body')

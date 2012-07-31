@@ -18,13 +18,9 @@
 window.NoDeventDemo = new Backbone.Model()
 
 NoDeventDemo.on "change:current_user", (user) ->
-  console.log user
-  console.log NoDeventDemo.get("current_user").get("username")
   if NoDeventDemo.get("current_user").get("username")?
-    console.log 'logout'
     $("#login").hide();
     $("#logout").show();
   else
-    console.log 'login'
     $("#login").show();
     $("#logout").hide();
