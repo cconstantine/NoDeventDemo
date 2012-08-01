@@ -24,3 +24,16 @@ NoDeventDemo.on "change:current_user", (user) ->
   else
     $("#login").show();
     $("#logout").hide();
+
+$ () ->
+  $(".session_form").parents("form").bind "ajax:error", (xhr, data, status) ->
+    data = JSON.parse(data.responseText)
+
+    for field, errors of data.errors
+      d = $(@).find("#user_#{field}-error")
+      d.html(field + " " + data.errors[field][0])
+      d.show("show")
+
+
+  $(".session_form").parents("form").bind "ajax:success", (xhr, data, status) ->
+    window.NoDeventDemo.set("current_user", new User(data));

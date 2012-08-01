@@ -51,6 +51,7 @@
             = form_tag sessions_path(:format => :json), :method => :post, :remote => true do
               .hidden.session_form
               .inputs
+                #user_login-error.alert.alert-error{style:"display:none;"}
                 = text_field_tag  :username, "", :required => true
                 = text_field_tag  :password, "", :required => true, :type => :password
                 = submit_tag "Login"
@@ -59,6 +60,7 @@
             = form_for User.new(), :format => :json, :method => :post, :remote => true do |f|
               .hidden.session_form
               .inputs
+                #user_username-error.alert.alert-error{style:"display:none;"}
                 = f.text_field :username,  :required => true
                 = f.text_field :password,  :required => true, :type => :password
                 = submit_tag "Register"
