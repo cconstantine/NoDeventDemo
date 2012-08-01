@@ -35,7 +35,12 @@
             Demo app for
             = link_to "NoDevent", "https://github.com/cconstantine/nodevent"
           %p
-            Demonstrate how NoDevent could be used in a responsive rails app with backbone integration.  View-source!  Check out the code!
+            Try opening two browser windows and posting a message.  View-source!  Check out the code!
+          %p
+            On the surface this looks like any other html5-like webapp, but you'll
+            note that besides initial page load the only way for new posts to make
+            it into the discussion list is via a NoDevent event getting sent from the server.  With NoDevent
+            you can get something much more like a true MVC, where the View changes on model updates!
           = yield
         .span3.login_forms
           #logout.float-right
