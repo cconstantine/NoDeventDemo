@@ -1,19 +1,9 @@
 :javascript
-  $(function() {
-    discussions = new DiscussionCollection(#{@discussions.to_json.html_safe})
-    discussions_view_list = new DiscussionListView({collection : discussions})
-    NoDeventDemo.set("current_user", new User(#{current_user.to_json.html_safe}));
-
-    $("#new_discussion").bind("ajax:success", function(xhr, data, status) {
-      $("#new_discussion #discussion_body").val('');
-    });
-  });
+  -#$(function() {
+  -#  $("#new_discussion").bind("ajax:success", function(xhr, data, status) {
+  -#    $("#new_discussion #discussion_body").val('');
+  -#  });
+  -#});
 .well
   %h2 Post
-  = form_for @discussion, :class => "form-horizontal", :method => :post, :remote => true, :format => :json do |f|
-    %p
-      = f.text_area  :body, :required => true, :rows => 3
-    = f.submit("Post")
-
-
-.discussions-list
+  = render :partial => "form"

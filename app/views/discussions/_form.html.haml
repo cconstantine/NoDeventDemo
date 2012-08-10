@@ -1,0 +1,7 @@
+= form_for @discussion, :method => @discussion.id.present? ? "PUT" : "POST" do |f|
+  %p
+    .subject
+      = f.text_field  :subject, :class => 'span12', :required => true
+    .body
+      = f.text_area  :body, :class => 'span12', :required => true, :rows => 20
+  = f.submit(@discussion.id.present? ? "Edit" : "Post")

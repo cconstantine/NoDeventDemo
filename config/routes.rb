@@ -1,6 +1,6 @@
 Testrails::Application.routes.draw do
 
-  root :to => 'discussions#new'
+  root :to => 'discussions#index'
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"

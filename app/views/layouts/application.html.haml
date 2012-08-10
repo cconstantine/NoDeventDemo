@@ -6,6 +6,10 @@
     = javascript_include_tag 'application'
     = stylesheet_link_tag "application"
     = csrf_meta_tags
+    :javascript
+      $(function() {
+        NoDeventDemo.set("current_user", new User(#{current_user.to_json.html_safe}));
+      });
     = yield :head
     = yield :js
 
@@ -31,6 +35,9 @@
     .container-fluid
       .row-fluid
         .span8
+          - if flash[:errors]
+            .alert.alert-error
+              = flash[:errors]
           %h3
             Demo app for
             = link_to "NoDevent", "https://github.com/cconstantine/nodevent"
@@ -41,7 +48,8 @@
             note that besides initial page load the only way for new posts to make
             it into the discussion list is via a NoDevent event getting sent from the server.  With NoDevent
             you can get something much more like a true MVC, where the View changes on model updates!
-          = yield
+          .main_content
+            = yield
         .span3.login_forms
           #logout.float-right
             = button_to "Logout", sessions_path(:format => :json), :method => :delete, :class => "session_form", :remote => true

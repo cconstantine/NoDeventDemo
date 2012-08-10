@@ -1,12 +1,27 @@
 .well
+  %form{action: @url(), method: 'POST', data-remote: "true"}
+    %input{name:"_method", type:"hidden", value:"PUT" }
+    %input{name: "discussion[subject]", required: "required"}
+    %input{name: "discussion[body]", required: "required"}
+    %input{ name:"commit", type:"submit", value:"Edit"} 
+
+
+
+
+.well
   .float-right
+    %a{href: @url() + "/edit"}
+      Edit
     %abbr.timeago{title: @get('created_at')}
       = @created_at
-  %strong#name
+  %h2
+    %a{href: @url()}
+      = @get('subject')
+  %p#name
     - if @get('user')? && @get('user').username?
       = @get('user').username?
     - else
       %string#name
         Anonymous
   %p
-    = @get('body')
+    != @get('html_body')

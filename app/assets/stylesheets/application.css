@@ -7,6 +7,7 @@
 */
 
 //= require twitter/bootstrap-responsive
+//= require backbone-forms-bootstrap
 
 .top-error {
     display: inline-block;
@@ -59,3 +60,4 @@
 #login {
     float: right;
 }
+

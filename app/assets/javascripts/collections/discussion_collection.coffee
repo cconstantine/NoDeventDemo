@@ -2,6 +2,7 @@
 
 class this.DiscussionCollection extends Backbone.Collection
   model: Discussion
+  url: '/discussions.json'
 
   initialize: (models) ->
     super(models)
