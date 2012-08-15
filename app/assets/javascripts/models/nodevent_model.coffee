@@ -1,4 +1,4 @@
-class this.NoDeventModel extends Backbone.Model
+class this.NoDeventModel extends Backbone.RelationalModel
   urlRoot: '/users'
 
   initialize: () ->
@@ -6,8 +6,8 @@ class this.NoDeventModel extends Backbone.Model
     @on 'change', () =>
       @_onJoinRoom()
 
-  onUpdate: (user) ->
-    @set(user)
+  onUpdate: (m) ->
+    @set(m)
 
   _onJoinRoom: () ->
     nodevent = @get('nodevent')
@@ -16,6 +16,7 @@ class this.NoDeventModel extends Backbone.Model
       @room.setKey(nodevent.key) if nodevent.key?
       @room.join()
 
-      @room.on 'update', (user) =>
-        @onUpdate(user)
+      @room.on 'update', (m) =>
+        console.log m
+        @onUpdate(m)
 

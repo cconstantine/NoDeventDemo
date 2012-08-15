@@ -8,7 +8,6 @@ gem 'therubyracer'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'backbone-rails'
-#gem 'backbone-forms-rails'
 gem 'ejs'
 gem 'jquery-rails'
 gem "haml-rails"

@@ -1,15 +1,21 @@
 class DiscussionsController < ApplicationController
-  respond_to :json, :html
+  respond_to :json, :html, :partial
 
   def new
     @discussion  = Discussion.new()
+    respond_to do |format|
+      format.html {}
+      format.partial{ }
+    end
   end
 
   def index
     @discussions = Discussion.order('id desc').limit(10).reverse
     respond_to do |format|
       format.html {  }
-      format.json { render :json =>  @discussions }
+      format.json {
+        render :json =>  @discussions
+      }
     end
   end
 
@@ -23,6 +29,10 @@ class DiscussionsController < ApplicationController
 
   def edit
     @discussion = Discussion.find params[:id]
+    respond_to do |format|
+      format.html {}
+      format.partial{ render "edit.html", :layout => false }
+    end
   end
 
   def update

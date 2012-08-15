@@ -2,8 +2,8 @@
 AppRouter  = Backbone.Router.extend
   routes:
     "" : "discussions"
+    "discussions/new" : "newDiscussion"
     "discussions/:id" : "discussion"
-    "discussions/:id/edit" : "editDiscussion"
 
   discussions: () ->
     @page = {};
@@ -14,21 +14,17 @@ AppRouter  = Backbone.Router.extend
 
     @page.discussions.fetch({add: true})
 
-  discussion: (id) ->
-    console.log id
+  newDiscussion: () ->
     @page = {};
+    @page.discussion_new = new DiscussionNew()
+    $(".main_content").html(@page.discussion_new.render())
 
-    @page.discussion_view = new DiscussionView(new Discussion({to_param: id}))
+  discussion: (id) ->
+    console.log 'routing discussion'
+    @page = {};
+    window.discussion = new Discussion({to_param: id})
+    @page.discussion_view = new DiscussionShow(window.discussion)
     $(".main_content").html(@page.discussion_view.render())
-
-  editDiscussion: (id) ->
-    elem = @discussion(id)
-
-    form = new Backbone.Form({
-        model: @page.discussion_view.discussion
-    }).render();
-
-    $(elem).append(form.el);
 
 $ ->
   app_router = new AppRouter
@@ -49,5 +45,5 @@ $(document).on "click", "a:not([data-bypass])", (evt) ->
       # `Backbone.history.navigate` is sufficient for all Routers and will
       # trigger the correct events. The Router's internal `navigate` method
       # calls this anyways.  The fragment is sliced from the root.
-      console.log href.attr
+      console.log "Going to: " + href.attr
       Backbone.history.navigate(href.attr, true);

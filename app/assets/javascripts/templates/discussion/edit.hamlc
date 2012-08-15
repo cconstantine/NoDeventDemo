@@ -1,0 +1,3 @@
+-if NoDeventDemo.isCurrentUser(@)
+  .float-right.edit
+    Edit

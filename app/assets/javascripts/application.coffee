@@ -6,16 +6,17 @@
 
 #= require jquery
 #= require jquery-ui
+#= require jquery_ujs
 
 #= require backbone-rails
-#= require backbone-forms
+#= require backbone-relational
 
 #= require hamlcoffee
 #= require rails-timeago
 
 #= require_tree .
 
-window.NoDeventDemo = new Backbone.Model()
+window.NoDeventDemo = new NoDeventDemoClass()
 
 NoDeventDemo.on "change:current_user", (user) ->
   if NoDeventDemo.get("current_user").get("username")?
@@ -38,3 +39,6 @@ $ () ->
   $(".session_form").parents("form").bind "ajax:success", (xhr, data, status) ->
     window.NoDeventDemo.set("current_user", new User(data));
     $(".login_forms .error").hide()
+
+if !console? || !console.log?
+  console.log = () ->
