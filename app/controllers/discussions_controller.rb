@@ -37,7 +37,8 @@ class DiscussionsController < ApplicationController
 
   def update
     @discussion = Discussion.find params[:id]
-    @discussion.user = current_user
+    head :unauthorized and return unless @discussion.user == current_user
+
     @discussion.update_attributes(params[:discussion])
     if @discussion.errors.present?
       flash[:errors]  = @discussion.errors.full_messages

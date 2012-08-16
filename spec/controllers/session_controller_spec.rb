@@ -9,15 +9,6 @@ describe SessionsController do
       let(:username) {user.username}
       let(:password) {'asdfasdf'}
 
-      describe "as html" do
-        let(:format) {"html"}
-        it "logs me in" do
-          subject
-          response.should redirect_to root_path
-          session[:user_id].should == user.id
-        end
-      end
-
       describe "as json" do
         let(:format) {"json"}
         it "logs me in" do
@@ -40,14 +31,6 @@ describe SessionsController do
           subject
           response.should_not be_success
           session[:user_id].should be_nil
-        end
-        describe "as html" do
-          let(:format) {"html"}
-          it "should not log me in" do
-            subject
-            response.should be_success
-            session[:user_id].should be_nil
-          end
         end
       end
     end

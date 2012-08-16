@@ -10,4 +10,5 @@ class this.DiscussionListView extends Backbone.View
 
   addOne: (model) ->
     v = new DiscussionView(model)
-    @$el.prepend(v.render())
+
+    @$el.prepend(v.make("div", {class: "well"}, v.render()))
