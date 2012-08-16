@@ -1,7 +1,7 @@
 #= require '../../models/discussion'
 
 class this.DiscussionNew extends Backbone.View
-  template: JST['discussion/discussion_new']
+  template: JST['discussion/new']
 
   initialize: () ->
     $.ajax("/discussions/new.partial").success (data) =>

@@ -1,7 +1,7 @@
 #= require '../../models/discussion'
 
 class this.DiscussionView extends Backbone.View
-  template: JST['discussion/discussion']
+  template: JST['discussion/view']
 
   initialize: (@discussion) ->
     if @discussion.isNew()

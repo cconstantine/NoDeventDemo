@@ -43,10 +43,10 @@ class DiscussionsController < ApplicationController
       flash[:errors]  = @discussion.errors.full_messages
     end
     respond_to do |format|
-      format.html { redirect_to @discussion  }
       format.json { render :json =>  @discussion }
     end
   end
+
   def create
     @discussion = Discussion.new(params[:discussion])
     @discussion.user = current_user
