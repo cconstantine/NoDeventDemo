@@ -1,9 +1,0 @@
----
-default:
-  id: 1
-  body: A body
-  created_at: 2012-08-16 06:30:53.757964000 Z
-  updated_at: 2012-08-16 06:30:53.757964000 Z
-  user_id: 6
-  slug: a-subject
-  subject: A Subject
