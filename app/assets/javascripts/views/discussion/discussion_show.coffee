@@ -12,7 +12,6 @@ class this.DiscussionShow extends Backbone.View
       @edit_view.render()
 
     @discussion.on "change:to_param", () =>
-      console.log "to_param change " + @discussion.url()
       Backbone.history.navigate(@discussion.url(), true);
 
     @discussion.on "change:body_html", () =>
@@ -28,13 +27,6 @@ class this.DiscussionShow extends Backbone.View
   showEdit: ->
     $.ajax(@discussion.url() + "/edit.partial").success (data) =>
       @$el.find("#edit_discussion").html('<div class="well">' + data + '</div>')
-
-      $(".edit_form form").bind "ajax:success", (data) ->
-        console.log 'submit!'
-
-      $(".edit_form form").bind "ajax:error", () ->
-        console.log "ERROR"
-
 
 
   render: ->

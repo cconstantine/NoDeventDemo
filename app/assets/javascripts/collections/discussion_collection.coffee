@@ -10,3 +10,6 @@ class this.DiscussionCollection extends Backbone.Collection
     @room.join()
     @room.on 'create', (newDisc) =>
       @add newDisc
+
+  comparator: (model) ->
+    model.id

@@ -17,6 +17,5 @@ class this.NoDeventModel extends Backbone.RelationalModel
       @room.join()
 
       @room.on 'update', (m) =>
-        console.log m
         @onUpdate(m)
 

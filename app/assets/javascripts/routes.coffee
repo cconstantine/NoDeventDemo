@@ -13,6 +13,8 @@ AppRouter  = Backbone.Router.extend
     @page.discussions_view_list = new DiscussionListView({collection : @page.discussions})
 
     @page.discussions.fetch({add: true})
+    $(".main_content").html(@page.discussions_view_list.render())
+
 
   newDiscussion: () ->
     @page = {};
@@ -20,9 +22,9 @@ AppRouter  = Backbone.Router.extend
     $(".main_content").html(@page.discussion_new.render())
 
   discussion: (id) ->
-    console.log 'routing discussion'
     @page = {};
-    window.discussion = new Discussion({to_param: id})
+    window.discussion = new Discussion({id: id})
+    window.discussion.fetch()
     @page.discussion_view = new DiscussionShow(window.discussion)
     $(".main_content").html(@page.discussion_view.render())
 
@@ -45,5 +47,4 @@ $(document).on "click", "a:not([data-bypass])", (evt) ->
       # `Backbone.history.navigate` is sufficient for all Routers and will
       # trigger the correct events. The Router's internal `navigate` method
       # calls this anyways.  The fragment is sliced from the root.
-      console.log "Going to: " + href.attr
       Backbone.history.navigate(href.attr, true);

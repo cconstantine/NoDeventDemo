@@ -1,9 +1,7 @@
 class Discussion < ActiveRecord::Base
-  attr_accessible :body, :subject
+  attr_accessible :body, :user
 
   include NoDevent::Base
-  extend FriendlyId
-  friendly_id :subject, use: :slugged
 
   after_create :nodevent_create
   after_update :nodevent_update
@@ -17,7 +15,7 @@ class Discussion < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge({:methods => [:html_body, :to_param], :include => :user})).merge(:nodevent => {:room => room})
+    super(options.merge({:methods => [:html_body], :include => :user})).merge(:nodevent => {:room => room})
   end
 
 

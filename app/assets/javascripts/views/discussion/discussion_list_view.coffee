@@ -1,14 +1,22 @@
 class this.DiscussionListView extends Backbone.View
-  el: ".discussions-list"
+  template: JST["discussion/index"]
 
   initialize: () ->
     @collection.on 'add', (newThing) =>
-      @addOne(newThing)
+      @render()
 
-    @collection.each (m) =>
-      @addOne(m)
+    @$el.html(@template());
+
+    @new_form = new DiscussionNew();
+    @$el.find(".new_discussion").html(@new_form.render())
+
 
   addOne: (model) ->
-    v = new DiscussionView(model)
+    @collection.add(new DiscussionView(model))
 
-    @$el.prepend(v.make("div", {class: "well"}, v.render()))
+  render: () ->
+    @$el.find(".discussion-list").html("")
+    @collection.each (item) =>
+      v = new DiscussionView(item)
+      @$el.find(".discussion-list").prepend(v.make("div", {class: "well"}, v.render()))
+    @$el

@@ -4,17 +4,13 @@ class this.DiscussionNew extends Backbone.View
   template: JST['discussion/new']
 
   initialize: () ->
-    $.ajax("/discussions/new.partial").success (data) =>
-      @$el.find("#edit_discussion").html('<div class="well">' + data + '</div>')
-
-      $(".edit_form form").bind "ajax:success", (data) ->
-        console.log data
-        console.log 'submit!'
-
-      $(".edit_form form").bind "ajax:error", () ->
-        console.log "ERROR"
-
-
+    NoDeventDemo.on "change:current_user", (user) =>
+      @render()
 
   render: ->
     @$el.html(@template())
+
+    $.ajax("/discussions/new.partial").success (data) =>
+      @$el.find("#new_discussion").html( data )
+
+    return @$el

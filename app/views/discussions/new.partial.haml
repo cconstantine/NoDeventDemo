@@ -1,8 +1,10 @@
-%h2 Post
-= form_for @discussion, :method => @discussion.id.present? ? "PUT" : "POST" do |f|
-  %p
-    .subject
-      = f.text_field  :subject, :class => 'span12', :required => true
-    .body
-      = f.text_area  :body, :class => 'span12', :required => true, :rows => 20
-  = f.submit(@discussion.id.present? ? "Edit" : "Post")
+-if current_user.present?
+  .well
+    %h2 Post
+    = form_for @discussion, :remote => true, :method => @discussion.id.present? ? "PUT" : "POST" do |f|
+      .body
+        = f.text_area  :body, :class => 'span12', :required => true, :rows => 4
+      = f.submit("Post")
+- else
+  .well
+    You must be logged in to post

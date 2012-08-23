@@ -1,16 +1,19 @@
 .float-right
-%h2
-  %a{href: @url()}
-    = @get('subject')
-%p#name
-  by
-  - if @get('user')?
-    = @get('user').get("username")
-  - else
-    %string#name
-      Anonymous
-  about
-  %abbr.timeago{title: @get('created_at')}
-    = @created_at
 %p
   != @get('html_body')
+
+%h2
+%p#name
+  %small
+    by
+    - if @get('user')?
+      = @get('user').get("username")
+    - else
+      %string#name
+        Anonymous
+    about
+    %abbr.timeago{title: @get('created_at')}
+      = @created_at
+    |
+    %a{href: @url()}
+      Permalink

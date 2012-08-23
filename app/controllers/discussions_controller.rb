@@ -10,7 +10,7 @@ class DiscussionsController < ApplicationController
   end
 
   def index
-    @discussions = Discussion.order('id desc').limit(10).reverse
+    @discussions = Discussion.order('id desc').limit(10)
     respond_to do |format|
       format.html {  }
       format.json {

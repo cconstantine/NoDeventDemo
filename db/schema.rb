@@ -11,18 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807052403) do
+ActiveRecord::Schema.define(:version => 20120823042716) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "account_id"
+    t.text     "message"
+    t.integer  "discussion_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "discussions", :force => true do |t|
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.string   "slug"
-    t.string   "subject"
   end
-
-  add_index "discussions", ["slug"], :name => "index_discussions_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
     t.datetime "created_at",      :null => false

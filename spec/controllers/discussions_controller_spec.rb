@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe DiscussionsController do
   describe "#create" do
-    let(:discussion) {Discussion.new(:subject => "I'm a subject!", :body => "hi")}
+    let(:discussion) {Discussion.new(:body => "hi")}
     subject {post :create, {:discussion => discussion.as_json, :format => format } }
 
     describe "with json" do
@@ -32,7 +32,7 @@ describe DiscussionsController do
   end
   describe "#update" do
     let(:discussion) {discussions(:default)}
-    let(:discussion_update) { {:subject => "Another subject", :body => "Another body"} }
+    let(:discussion_update) { {:body => "Another body"} }
     subject {put :update, {:id => discussion.to_param, :discussion => discussion_update, :format => :json} }
 
     context "as no one" do
@@ -63,7 +63,6 @@ describe DiscussionsController do
         subject
         response.should be_success
         discussion.reload
-        discussion.subject.should == "Another subject"
         discussion.body.should == "Another body"
       end
     end
