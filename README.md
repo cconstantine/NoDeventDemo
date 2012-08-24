@@ -8,11 +8,13 @@ I'm assuming you have a working postgress, redis, and ruby install running on a 
 
 ## Use it
 1) Install node (http://nodejs.org)
+
 2) Start nodevent
 ```shell
 npm install -g nodevent
 npm start nodevent
 ```
+
 3) Clone the repo
 ```shell
 git clone https://github.com/cconstantine/NoDeventDemo.git
