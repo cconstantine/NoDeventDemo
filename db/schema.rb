@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120823042716) do
+ActiveRecord::Schema.define(:version => 20120824033848) do
 
   create_table "comments", :force => true do |t|
     t.integer  "account_id"
@@ -23,9 +23,10 @@ ActiveRecord::Schema.define(:version => 20120823042716) do
 
   create_table "discussions", :force => true do |t|
     t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "user_id"
+    t.integer  "bonk_count", :default => 0
   end
 
   create_table "users", :force => true do |t|

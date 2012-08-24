@@ -1,4 +1,5 @@
 %h2 Edit
 = form_for @discussion, :method => "PUT", :remote => true, :format => :json do |f|
-  .bsch f.text_area  :body, :class => 'span12', :required => true, :rows => 20
+  .body
+    = f.text_area  :body, :class => 'span12', :required => true, :rows => 20
   = f.submit("Save")

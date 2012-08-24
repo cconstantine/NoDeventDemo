@@ -1,6 +1,17 @@
 require 'spec_helper'
 
 describe DiscussionsController do
+  describe "#bonk" do
+    let(:discussion) {discussions(:default)}
+    subject {post :bonk, {:discussion_id => discussion.to_param,:format => :json}}
+
+    it "should increase the bonks" do
+      expect {
+        subject
+        response.should be_success
+      }.to change {discussion.reload.bonk_count}.by(1)
+    end
+  end
   describe "#create" do
     let(:discussion) {Discussion.new(:body => "hi")}
     subject {post :create, {:discussion => discussion.as_json, :format => format } }

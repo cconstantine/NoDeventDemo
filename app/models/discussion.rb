@@ -17,6 +17,4 @@ class Discussion < ActiveRecord::Base
   def as_json(options={})
     super(options.merge({:methods => [:html_body], :include => :user})).merge(:nodevent => {:room => room})
   end
-
-
 end

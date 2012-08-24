@@ -8,7 +8,9 @@ Testrails::Application.routes.draw do
 
   resources :users
   resource :sessions
-  resources :discussions
+  resources :discussions do
+    post :bonk
+  end
 
 end
 

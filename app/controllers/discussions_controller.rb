@@ -48,6 +48,15 @@ class DiscussionsController < ApplicationController
     end
   end
 
+  def bonk
+    @discussion = Discussion.find params[:discussion_id]
+    @discussion.increment(:bonk_count)
+    @discussion.save!
+    respond_to do |format|
+      format.json{ render :json => @discussion}
+    end
+  end
+
   def create
     @discussion = Discussion.new(params[:discussion])
     @discussion.user = current_user

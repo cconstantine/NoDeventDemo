@@ -1,10 +1,10 @@
-.float-right
+
 %p
   != @get('html_body')
 
-%h2
 %p#name
   %small
+    .float-right
     by
     - if @get('user')?
       = @get('user').get("username")
@@ -17,3 +17,7 @@
     |
     %a{href: @url()}
       Permalink
+    |
+    .btn.btn-success.bonks{:title => "BONK!"}
+      = @get("bonk_count")
+      bonks
