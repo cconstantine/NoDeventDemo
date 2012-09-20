@@ -4,9 +4,9 @@ require 'bundler/capistrano'
 set :application, "NoDevent"
 set :repository, "git@github.com:cconstantine/NoDeventDemo.git"
 set :scm, "git"
-set :user, "cconstantine"
+set :user, "deploy"
 set :git_shallow_clone, 1
-set :deploy_to, "/var/www/nodevent"
+set :deploy_to, "/var/www/nodeventdemo"
 default_run_options[:pty] = true
 
 set :rvm_ruby_string, 'ruby-1.9.3-p125@nodeventdemo'

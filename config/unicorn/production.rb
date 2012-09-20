@@ -1,11 +1,11 @@
-listen "/tmp/unicorn.sock"
+listen "/tmp/nodeventdemo-unicorn.sock"
 worker_processes 2
 
 working_directory "/var/www/nodevent/current"
 
-pid "/var/www/nodevent/shared/pids/unicorn.pid"
-stderr_path "/var/www/nodevent/shared/log/unicorn_stderr.log"
-stdout_path "/var/www/nodevent/shared/log/unicorn_stdout.log"
+pid "/var/www/nodeventdemo/shared/pids/unicorn.pid"
+stderr_path "/var/www/nodeventdemo/shared/log/unicorn_stderr.log"
+stdout_path "/var/www/nodeventdemo/shared/log/unicorn_stdout.log"
 
 after_fork do |server,worker|
   #ActiveRecord::Base.connection.disconnect!

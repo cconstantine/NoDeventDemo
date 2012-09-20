@@ -19,7 +19,7 @@ gem 'bluecloth'
 gem 'pg'
 gem 'bcrypt-ruby'
 
-gem "nodevent"#, :path => '../nodevent/gem/nodevent'
+gem "nodevent"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
