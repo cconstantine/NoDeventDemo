@@ -1,7 +1,7 @@
 listen "/tmp/nodeventdemo-unicorn.sock"
 worker_processes 2
 
-working_directory "/var/www/nodevent/current"
+working_directory "/var/www/nodeventdemo/current"
 
 pid "/var/www/nodeventdemo/shared/pids/unicorn.pid"
 stderr_path "/var/www/nodeventdemo/shared/log/unicorn_stderr.log"
