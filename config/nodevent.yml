@@ -1,16 +1,16 @@
 development: &development
-  host: 'http://localhost:8080'
-  namespace: '/nodevent'
+  host: 'http://spigot.io:8080'
+  spigot.io:
+    api_key: "624815f22ab331f0b2e12935a4a857f6"
 
 test: &test
-  host: 'http://localhost:8080'
-  namespace: '/nodevent'
+  <<: *development
 
 cucumber:
   <<: *test
 
 production:
-  host: 'http://nodevent.com:8080'
-  namespace: '/nodevent'
-  
+  <<: *development
+  namespace: '/c0a15e9c967ac9690134d28672bf1c7b1a4a2efe'
+  secret: '47602ed3ae3758f5aff289bd093786627523eef5'
 
