@@ -39,6 +39,3 @@ $ () ->
   $(".session_form").parents("form").bind "ajax:success", (xhr, data, status) ->
     window.NoDeventDemo.set("current_user", new User(data));
     $(".login_forms .error").hide()
-
-if !console? || !console.log?
-  console.log = () ->
